@@ -1,0 +1,1259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ibrahim Aminu | Developer</title>
+    <style>
+        /* ===== RESET & BASE ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #222;
+            background: #fafafa;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* ===== SCROLL ANIMATIONS ===== */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ===== NAVIGATION ===== */
+        nav {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            color: #222;
+            padding: 16px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.06);
+            border-bottom: 1px solid #eee;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 26px;
+            font-weight: 700;
+            color: #111;
+            letter-spacing: -0.5px;
+            background: linear-gradient(135deg, #2563eb, #7c3aed);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .logo span {
+            background: linear-gradient(135deg, #7c3aed, #2563eb);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 32px;
+        }
+
+        .nav-links a {
+            color: #444;
+            font-weight: 500;
+            transition: color 0.3s;
+            font-size: 15px;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(135deg, #2563eb, #7c3aed);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover {
+            color: #2563eb;
+        }
+
+        .hamburger {
+            display: none;
+            font-size: 28px;
+            background: none;
+            border: none;
+            color: #222;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .hamburger:hover {
+            transform: rotate(90deg);
+        }
+
+        /* ===== HERO ===== */
+        header {
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            color: #fff;
+            padding: 90px 0 70px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Animated background particles */
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(2px 2px at 20% 30%, #fff, transparent),
+                radial-gradient(2px 2px at 40% 70%, #fff, transparent),
+                radial-gradient(2px 2px at 60% 20%, #fff, transparent),
+                radial-gradient(2px 2px at 80% 80%, #fff, transparent),
+                radial-gradient(2px 2px at 10% 90%, #fff, transparent),
+                radial-gradient(2px 2px at 90% 10%, #fff, transparent),
+                radial-gradient(2px 2px at 50% 50%, #fff, transparent),
+                radial-gradient(2px 2px at 70% 40%, #fff, transparent),
+                radial-gradient(2px 2px at 30% 60%, #fff, transparent),
+                radial-gradient(2px 2px at 85% 50%, #fff, transparent);
+            background-size: 200px 200px;
+            opacity: 0.3;
+            animation: twinkle 4s ease-in-out infinite alternate;
+        }
+
+        @keyframes twinkle {
+            0% { opacity: 0.2; }
+            100% { opacity: 0.5; }
+        }
+
+        /* Gradient orb */
+        .hero-orb {
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(37, 99, 235, 0.2), rgba(124, 58, 237, 0.1), transparent 70%);
+            top: -200px;
+            right: -100px;
+            animation: floatOrb 8s ease-in-out infinite;
+        }
+
+        .hero-orb-2 {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(124, 58, 237, 0.15), rgba(37, 99, 235, 0.05), transparent 70%);
+            bottom: -100px;
+            left: -50px;
+            animation: floatOrb 12s ease-in-out infinite reverse;
+        }
+
+        @keyframes floatOrb {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(30px, -30px) scale(1.1); }
+            66% { transform: translate(-20px, 20px) scale(0.9); }
+        }
+
+        .hero {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 50px;
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-text {
+            flex: 1;
+            min-width: 280px;
+        }
+
+        .hero-text h1 {
+            font-size: 44px;
+            margin-bottom: 10px;
+            font-weight: 700;
+            letter-spacing: -1px;
+            color: #fff;
+        }
+
+        .highlight {
+            background: linear-gradient(135deg, #60a5fa, #a78bfa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            position: relative;
+        }
+
+        .highlight::after {
+            content: '';
+            position: absolute;
+            bottom: 2px;
+            left: 0;
+            width: 100%;
+            height: 6px;
+            background: linear-gradient(135deg, #60a5fa, #a78bfa);
+            opacity: 0.2;
+            border-radius: 4px;
+        }
+
+        .tagline {
+            font-size: 20px;
+            color: #c4b5fd;
+            margin-bottom: 12px;
+            font-weight: 400;
+        }
+
+        .bio {
+            font-size: 17px;
+            color: #d1d5db;
+            margin-bottom: 28px;
+            max-width: 450px;
+            line-height: 1.7;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 12px 32px;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-block;
+            font-size: 15px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #2563eb, #7c3aed);
+            color: #fff;
+            box-shadow: 0 4px 14px rgba(37, 99, 235, 0.25);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 8px 30px rgba(37, 99, 235, 0.4);
+        }
+
+        .btn-outline {
+            border: 2px solid #818cf8;
+            color: #818cf8;
+            background: transparent;
+        }
+
+        .btn-outline:hover {
+            background: linear-gradient(135deg, #2563eb, #7c3aed);
+            color: #fff;
+            transform: translateY(-3px);
+            border-color: transparent;
+            box-shadow: 0 8px 30px rgba(37, 99, 235, 0.3);
+        }
+
+        /* ===== CODE BLOCK ANIMATION ===== */
+        .hero-code {
+            flex: 0 0 350px;
+            text-align: center;
+            position: relative;
+        }
+
+        .code-block {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 30px 25px;
+            text-align: left;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 14px;
+            color: #e5e7eb;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            animation: codePulse 4s ease-in-out infinite;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .code-block::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(from 0deg, transparent, rgba(37, 99, 235, 0.1), transparent, rgba(124, 58, 237, 0.1), transparent);
+            animation: rotateGlow 10s linear infinite;
+        }
+
+        @keyframes rotateGlow {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .code-line {
+            position: relative;
+            z-index: 1;
+            padding: 3px 0;
+            opacity: 0;
+            animation: typeCode 0.5s ease forwards;
+        }
+
+        .code-line:nth-child(1) { animation-delay: 0.1s; }
+        .code-line:nth-child(2) { animation-delay: 0.3s; }
+        .code-line:nth-child(3) { animation-delay: 0.5s; }
+        .code-line:nth-child(4) { animation-delay: 0.7s; }
+        .code-line:nth-child(5) { animation-delay: 0.9s; }
+        .code-line:nth-child(6) { animation-delay: 1.1s; }
+        .code-line:nth-child(7) { animation-delay: 1.3s; }
+        .code-line:nth-child(8) { animation-delay: 1.5s; }
+        .code-line:nth-child(9) { animation-delay: 1.7s; }
+
+        @keyframes typeCode {
+            0% { opacity: 0; transform: translateX(-20px); }
+            100% { opacity: 1; transform: translateX(0); }
+        }
+
+        .code-line .keyword {
+            color: #818cf8;
+        }
+
+        .code-line .string {
+            color: #34d399;
+        }
+
+        .code-line .comment {
+            color: #6b7280;
+            font-style: italic;
+        }
+
+        .code-line .function {
+            color: #fbbf24;
+        }
+
+        .code-line .variable {
+            color: #60a5fa;
+        }
+
+        .cursor-blink {
+            display: inline-block;
+            width: 2px;
+            height: 18px;
+            background: #818cf8;
+            margin-left: 2px;
+            animation: blink 1s step-end infinite;
+            vertical-align: text-bottom;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        @keyframes codePulse {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-5px) scale(1.01); }
+        }
+
+        .code-block:hover {
+            animation: codePulse 2s ease-in-out infinite;
+        }
+
+        /* ===== SECTIONS ===== */
+        section {
+            padding: 75px 0;
+        }
+
+        .section-title {
+            font-size: 32px;
+            text-align: center;
+            margin-bottom: 45px;
+            position: relative;
+            color: #111;
+            font-weight: 700;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 50px;
+            height: 4px;
+            background: linear-gradient(135deg, #2563eb, #7c3aed);
+            margin: 12px auto 0;
+            border-radius: 4px;
+        }
+
+        /* ===== ABOUT ===== */
+        #about {
+            background: linear-gradient(135deg, #f8faff 0%, #ffffff 100%);
+        }
+
+        .about-content {
+            max-width: 700px;
+            margin: 0 auto;
+            text-align: center;
+            font-size: 17px;
+            color: #444;
+            line-height: 1.8;
+        }
+
+        .about-content p {
+            margin-bottom: 16px;
+        }
+
+        /* ===== EXPERIENCE ===== */
+        #experience {
+            background: linear-gradient(135deg, #ffffff 0%, #f8faff 100%);
+        }
+
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 3px;
+            height: 100%;
+            background: linear-gradient(180deg, #2563eb, #7c3aed, #2563eb);
+            border-radius: 2px;
+        }
+
+        .timeline-item {
+            margin-bottom: 40px;
+            position: relative;
+            width: 50%;
+            padding-right: 40px;
+            text-align: right;
+        }
+
+        .timeline-item:nth-child(even) {
+            margin-left: 50%;
+            padding-right: 0;
+            padding-left: 40px;
+            text-align: left;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            right: -8px;
+            top: 20px;
+            width: 16px;
+            height: 16px;
+            background: linear-gradient(135deg, #2563eb, #7c3aed);
+            border-radius: 50%;
+            border: 3px solid #fff;
+            box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.2);
+        }
+
+        .timeline-item:nth-child(even)::before {
+            left: -8px;
+            right: auto;
+        }
+
+        .timeline-content {
+            background: #ffffff;
+            padding: 25px 30px;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+            border: 1px solid #f0f4ff;
+            transition: all 0.3s ease;
+        }
+
+        .timeline-content:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(37, 99, 235, 0.1);
+            border-color: #2563eb30;
+        }
+
+        .timeline-icon {
+            font-size: 32px;
+            margin-bottom: 8px;
+        }
+
+        .timeline-content h3 {
+            font-size: 18px;
+            color: #111;
+            margin-bottom: 4px;
+        }
+
+        .timeline-content .company {
+            font-size: 14px;
+            color: #2563eb;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .timeline-content .date {
+            font-size: 13px;
+            color: #888;
+            margin-bottom: 10px;
+        }
+
+        .timeline-content p {
+            color: #555;
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 12px;
+        }
+
+        .timeline-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .timeline-tags span {
+            background: linear-gradient(135deg, #f0f4ff, #e8edf9);
+            padding: 3px 14px;
+            border-radius: 50px;
+            font-size: 12px;
+            color: #222;
+            font-weight: 500;
+        }
+
+        .timeline-item:nth-child(even) .timeline-tags {
+            justify-content: flex-start;
+        }
+
+        .timeline-item .timeline-tags {
+            justify-content: flex-end;
+        }
+
+        /* ===== PROJECTS ===== */
+        #projects {
+            background: linear-gradient(135deg, #f8faff 0%, #ffffff 100%);
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .project-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 32px 26px;
+            border-radius: 20px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+            transition: all 0.3s ease;
+            text-align: center;
+            border: 1px solid #f0f4ff;
+        }
+
+        .project-card:hover {
+            transform: translateY(-8px) scale(1.01);
+            box-shadow: 0 16px 50px rgba(37, 99, 235, 0.12);
+            border-color: #2563eb40;
+        }
+
+        .project-icon {
+            font-size: 44px;
+            margin-bottom: 14px;
+            display: inline-block;
+            animation: float 4s ease-in-out infinite;
+        }
+
+        .project-card:nth-child(2) .project-icon {
+            animation-delay: 1s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .project-card h3 {
+            margin-bottom: 10px;
+            color: #111;
+            font-size: 20px;
+        }
+
+        .project-card p {
+            color: #555;
+            font-size: 15px;
+            margin-bottom: 16px;
+            line-height: 1.6;
+        }
+
+        .tech-tags {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 18px;
+        }
+
+        .tech-tags span {
+            background: linear-gradient(135deg, #e8edf9, #f0f4ff);
+            padding: 4px 16px;
+            border-radius: 50px;
+            font-size: 13px;
+            color: #222;
+            font-weight: 500;
+            border: 1px solid #e0e8f5;
+        }
+
+        .project-links {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+        }
+
+        .project-links a {
+            color: #2563eb;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .project-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(135deg, #2563eb, #7c3aed);
+            transition: width 0.3s;
+        }
+
+        .project-links a:hover::after {
+            width: 100%;
+        }
+
+        .project-links a:hover {
+            color: #7c3aed;
+        }
+
+        /* ===== SKILLS ===== */
+        #skills {
+            background: linear-gradient(135deg, #ffffff 0%, #f8faff 100%);
+        }
+
+        .skills-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 14px;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .skill-item {
+            background: #ffffff;
+            color: #222;
+            padding: 10px 30px;
+            border-radius: 50px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: inline-block;
+            border: 1.5px solid #2563eb;
+            box-shadow: 0 2px 8px rgba(37, 99, 235, 0.05);
+            cursor: default;
+        }
+
+        .skill-item:hover {
+            background: linear-gradient(135deg, #2563eb, #7c3aed);
+            color: #fff;
+            transform: scale(1.08) translateY(-3px);
+            box-shadow: 0 8px 25px rgba(37, 99, 235, 0.3);
+            border-color: transparent;
+        }
+
+        /* ===== CERTIFICATES ===== */
+        #certificates {
+            background: linear-gradient(135deg, #f8faff 0%, #ffffff 100%);
+        }
+
+        .cert-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .cert-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 30px 26px;
+            border-radius: 20px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+            transition: all 0.3s ease;
+            text-align: center;
+            flex: 1 1 260px;
+            max-width: 320px;
+            border: 1px solid #f0f4ff;
+        }
+
+        .cert-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 16px 40px rgba(37, 99, 235, 0.08);
+            border-color: #2563eb30;
+        }
+
+        .cert-icon {
+            font-size: 44px;
+            margin-bottom: 12px;
+        }
+
+        .cert-card h3 {
+            font-size: 19px;
+            color: #111;
+            margin-bottom: 8px;
+        }
+
+        .cert-card p {
+            color: #555;
+            font-size: 14px;
+            margin-bottom: 16px;
+            line-height: 1.6;
+        }
+
+        .cert-link {
+            display: inline-block;
+            background: linear-gradient(135deg, #2563eb, #7c3aed);
+            color: #fff;
+            padding: 8px 26px;
+            border-radius: 50px;
+            font-weight: 500;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 14px rgba(37, 99, 235, 0.2);
+        }
+
+        .cert-link:hover {
+            transform: scale(1.05) translateY(-2px);
+            box-shadow: 0 8px 25px rgba(37, 99, 235, 0.3);
+        }
+
+        .cert-link.in-progress {
+            background: #e8edf9;
+            color: #444;
+            box-shadow: none;
+        }
+
+        .cert-link.in-progress:hover {
+            background: #d5dff0;
+            transform: scale(1.05);
+        }
+
+        /* ===== CONTACT ===== */
+        #contact {
+            background: linear-gradient(135deg, #ffffff 0%, #f8faff 100%);
+            color: #222;
+            border-top: 1px solid #f0f0f0;
+        }
+
+        #contact .section-title {
+            color: #111;
+        }
+
+        .contact-sub {
+            text-align: center;
+            font-size: 17px;
+            color: #555;
+            margin-bottom: 32px;
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .contact-btn {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 12px 32px;
+            border-radius: 50px;
+            color: #222;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: 1.5px solid #e8edf9;
+            font-size: 15px;
+        }
+
+        .contact-btn:hover {
+            background: linear-gradient(135deg, #2563eb, #7c3aed);
+            color: #fff;
+            transform: translateY(-3px) scale(1.02);
+            border-color: transparent;
+            box-shadow: 0 8px 30px rgba(37, 99, 235, 0.25);
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            background: linear-gradient(135deg, #f8faff, #eef2ff);
+            color: #888;
+            text-align: center;
+            padding: 28px 0;
+            font-size: 14px;
+            border-top: 1px solid #f0f0f0;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            .hero {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .hero-text h1 {
+                font-size: 32px;
+            }
+
+            .bio {
+                margin: 0 auto 24px;
+                max-width: 100%;
+            }
+
+            .hero-buttons {
+                justify-content: center;
+            }
+
+            .hero-code {
+                flex: 0 0 100%;
+                width: 100%;
+            }
+
+            .code-block {
+                font-size: 11px;
+                padding: 20px;
+            }
+
+            .hero-orb {
+                width: 300px;
+                height: 300px;
+                top: -100px;
+                right: -50px;
+            }
+
+            .hero-orb-2 {
+                width: 200px;
+                height: 200px;
+                bottom: -50px;
+                left: -30px;
+            }
+
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                background: rgba(255, 255, 255, 0.98);
+                backdrop-filter: blur(10px);
+                position: absolute;
+                top: 68px;
+                left: 0;
+                width: 100%;
+                padding: 24px 0;
+                text-align: center;
+                gap: 16px;
+                box-shadow: 0 20px 40px rgba(0, 0, 0, 0.06);
+                border-bottom: 1px solid #eee;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .hamburger {
+                display: block;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .timeline::before {
+                left: 20px;
+            }
+
+            .timeline-item {
+                width: 100%;
+                padding-left: 50px;
+                padding-right: 0;
+                text-align: left;
+            }
+
+            .timeline-item:nth-child(even) {
+                margin-left: 0;
+                padding-left: 50px;
+                text-align: left;
+            }
+
+            .timeline-item::before {
+                left: 12px;
+                right: auto;
+            }
+
+            .timeline-item:nth-child(even)::before {
+                left: 12px;
+                right: auto;
+            }
+
+            .timeline-item .timeline-tags {
+                justify-content: flex-start !important;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== NAVIGATION ===== -->
+    <nav>
+        <div class="container nav-container">
+            <a href="#" class="logo">Ibrahim<span>Aminu</span></a>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#certificates">Certificates</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <button class="hamburger" id="hamburger">☰</button>
+        </div>
+    </nav>
+
+    <!-- ===== HERO ===== -->
+    <header>
+        <div class="hero-orb"></div>
+        <div class="hero-orb-2"></div>
+        <div class="container hero">
+            <div class="hero-text">
+                <h1>Hi, I'm <span class="highlight">Ibrahim Aminu</span></h1>
+                <p class="tagline">Beginner Developer | Problem Solver | Curious Learner</p>
+                <p class="bio">
+                    I build clean, functional websites and love turning ideas into code.
+                </p>
+                <div class="hero-buttons">
+                    <a href="#projects" class="btn btn-primary">See My Work</a>
+                    <a href="#contact" class="btn btn-outline">Contact Me</a>
+                </div>
+            </div>
+            <div class="hero-code">
+                <div class="code-block">
+                    <div class="code-line"><span class="comment">// Hello, World!</span></div>
+                    <div class="code-line"><span class="keyword">const</span> <span class="variable">developer</span> = {</div>
+                    <div class="code-line">&nbsp;&nbsp;name: <span class="string">"Ibrahim Aminu"</span>,</div>
+                    <div class="code-line">&nbsp;&nbsp;title: <span class="string">"Developer"</span>,</div>
+                    <div class="code-line">&nbsp;&nbsp;skills: [<span class="string">"HTML"</span>, <span class="string">"CSS"</span>, <span class="string">"JS"</span>],</div>
+                    <div class="code-line">&nbsp;&nbsp;<span class="function">code</span>: <span class="keyword">function</span>() {</div>
+                    <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span> <span class="string">"Building amazing things!"</span>;</div>
+                    <div class="code-line">&nbsp;&nbsp;}</div>
+                    <div class="code-line">};</div>
+                    <div class="code-line"><span class="variable">developer</span>.<span class="function">code</span>(); <span class="cursor-blink"></span></div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ===== ABOUT ===== -->
+    <section id="about">
+        <div class="container">
+            <h2 class="section-title fade-in">About Me</h2>
+            <div class="about-content fade-in">
+                <p>
+                    I'm a passionate beginner developer who recently started my coding journey.
+                    I'm in level 200 in Software engineering at Northwest University Kano.
+                    I love learning new technologies and building projects that solve real problems.
+                    Currently exploring <strong>HTML, CSS, JavaScript.</strong>
+                </p>
+                <p>
+                    When I'm not coding, I enjoy gaming, reading tech blogs, and contributing
+                    to open-source projects.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== EXPERIENCE ===== -->
+    <section id="experience">
+        <div class="container">
+            <h2 class="section-title fade-in">My Journey & Experience</h2>
+            <p style="text-align: center; max-width: 600px; margin: 0 auto 40px; color: #555; font-size: 16px;">
+                As a beginner, every line of code I write adds to my experience. Here's my learning journey so far:
+            </p>
+            <div class="timeline">
+                <!-- Experience 1 -->
+                <div class="timeline-item fade-in">
+                    <div class="timeline-content">
+                        <div class="timeline-icon">📚</div>
+                        <h3>Continuous Learning</h3>
+                        <div class="company">Self-Taught Developer</div>
+                        <div class="date">2024 - Present</div>
+                        <p>
+                            Completed FreeCodeCamp's Responsive Web Design certification. 
+                            Currently learning JavaScript Algorithms & Data Structures. 
+                            Daily practice through coding challenges and building projects.
+                        </p>
+                        <div class="timeline-tags">
+                            <span>FreeCodeCamp</span>
+                            <span>Online Courses</span>
+                            <span>Documentation</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Experience 2 -->
+                <div class="timeline-item fade-in">
+                    <div class="timeline-content">
+                        <div class="timeline-icon">💻</div>
+                        <h3>Building Projects</h3>
+                        <div class="company">Portfolio Development</div>
+                        <div class="date">2025 - Present</div>
+                        <p>
+                            Created multiple projects including a Calculator App, Personal Bio Page,
+                            and this Portfolio. Each project teaches me new concepts like DOM manipulation,
+                            responsive design, and debugging techniques.
+                        </p>
+                        <div class="timeline-tags">
+                            <span>HTML5</span>
+                            <span>CSS3</span>
+                            <span>JavaScript</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Experience 3 -->
+                <div class="timeline-item fade-in">
+                    <div class="timeline-content">
+                        <div class="timeline-icon">🔍</div>
+                        <h3>Problem Solving</h3>
+                        <div class="company">Daily Practice</div>
+                        <div class="date">2025 - Present</div>
+                        <p>
+                            Solving coding challenges on platforms like FreeCodeCamp and Codewars.
+                            Learning to break down problems, write clean code, and think like a developer.
+                            Every bug fixed is a lesson learned!
+                        </p>
+                        <div class="timeline-tags">
+                            <span>Algorithms</span>
+                            <span>Debugging</span>
+                            <span>Logic</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Experience 4 -->
+                <div class="timeline-item fade-in">
+                    <div class="timeline-content">
+                        <div class="timeline-icon">🤝</div>
+                        <h3>Open Source Contributions</h3>
+                        <div class="company">GitHub Community</div>
+                        <div class="date">2025 - Present</div>
+                        <p>
+                            Exploring GitHub, learning version control, and contributing to small
+                            open-source projects. Understanding how collaborative coding works
+                            and building my developer network.
+                        </p>
+                        <div class="timeline-tags">
+                            <span>Git</span>
+                            <span>GitHub</span>
+                            <span>Collaboration</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== PROJECTS ===== -->
+    <section id="projects">
+        <div class="container">
+            <h2 class="section-title fade-in">My Projects</h2>
+            <div class="projects-grid">
+                <!-- Simple Calculator -->
+                <div class="project-card fade-in">
+                    <div class="project-icon">🧮</div>
+                    <h3>Simple Calculator</h3>
+                    <p>Basic calculator with add, subtract, multiply, divide and clear.</p>
+                    <div class="tech-tags">
+                        <span>HTML</span>
+                        <span>CSS</span>
+                        <span>JavaScript</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="#">Live Demo</a>
+                        <a href="https://github.com/ibrahimaminugarba05-hub" target="_blank">GitHub</a>
+                    </div>
+                </div>
+
+                <!-- Beginner Website -->
+                <div class="project-card fade-in">
+                    <div class="project-icon">🌱</div>
+                    <h3>Personal Bio Page</h3>
+                    <p>A clean one-page bio with intro, hobbies, and social links.</p>
+                    <div class="tech-tags">
+                        <span>HTML</span>
+                        <span>CSS</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="#">Live Demo</a>
+                        <a href="https://github.com/ibrahimaminugarba05-hub" target="_blank">GitHub</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== SKILLS ===== -->
+    <section id="skills">
+        <div class="container">
+            <h2 class="section-title fade-in">My Skills</h2>
+            <div class="skills-grid fade-in">
+                <div class="skill-item">HTML5</div>
+                <div class="skill-item">CSS3</div>
+                <div class="skill-item">JavaScript</div>
+                <div class="skill-item">Git & GitHub</div>
+                <div class="skill-item">Responsive Design</div>
+                <div class="skill-item">Problem Solving</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== CERTIFICATES ===== -->
+    <section id="certificates">
+        <div class="container">
+            <h2 class="section-title fade-in">Certificates</h2>
+            <div class="cert-grid">
+                <!-- Responsive Web Design Certificate -->
+                <div class="cert-card fade-in">
+                    <div class="cert-icon">📜</div>
+                    <h3>Responsive Web Design</h3>
+                    <p>FreeCodeCamp certification — HTML & CSS, flexbox, grid, media queries.</p>
+                    <a href="https://www.freecodecamp.org/certification/offxibraheem/responsive-web-design-v9" 
+                       target="_blank" 
+                       class="cert-link">View Certificate</a>
+                </div>
+                <!-- JavaScript Algorithms -->
+                <div class="cert-card fade-in">
+                    <div class="cert-icon">⚡</div>
+                    <h3>JavaScript Algorithms</h3>
+                    <p>FreeCodeCamp (in progress) — core JS, functions, arrays, objects.</p>
+                    <a href="#" class="cert-link in-progress">In Progress</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== CONTACT ===== -->
+    <section id="contact">
+        <div class="container">
+            <h2 class="section-title fade-in">Contact Me</h2>
+            <p class="contact-sub fade-in">Let's connect! I'm open to collaborations and opportunities.</p>
+            <div class="contact-links fade-in">
+                <a href="mailto:Ibrahimaminugarba05@gmail.com" class="contact-btn">📧 Email</a>
+                <a href="https://wa.me/2347089992828" target="_blank" class="contact-btn">💬 WhatsApp</a>
+                <a href="https://github.com/ibrahimaminugarba05-hub" target="_blank" class="contact-btn">🐙 GitHub</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Ibrahim Aminu. Built with ❤️ and caffeine.</p>
+        </div>
+    </footer>
+
+    <script>
+    // ===== HAMBURGER MENU =====
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.querySelector('.nav-links');
+
+    hamburger.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
+    });
+
+    document.querySelectorAll('.nav-links a').forEach(link => {
+        link.addEventListener('click', () => {
+            navLinks.classList.remove('active');
+        });
+    });
+
+    // ===== SMOOTH SCROLLING =====
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
+
+    // ===== SCROLL ANIMATIONS (FADE-IN) =====
+    const fadeElements = document.querySelectorAll('.fade-in');
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    });
+
+    fadeElements.forEach(el => observer.observe(el));
+    </script>
+</body>
+</html>
